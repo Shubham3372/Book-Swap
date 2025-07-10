@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - BookSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Existing meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add these new meta tags -->
+    <meta name="description" content="BookSwap: Trade textbooks with students on your campus.">
+    <meta name="keywords" content="books, textbooks, swap, trade, college">
+    <meta property="og:title" content="BookSwap">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/images/cover.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Rest of your head content (title, CSS, etc.) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ffd166;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+        
+        main {
+            padding: 3rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .settings-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .settings-sidebar {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .settings-nav {
+            list-style: none;
+        }
+        
+        .settings-nav li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .settings-nav a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: #555;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .settings-nav a:hover, .settings-nav a.active {
+            background-color: #f0f4f9;
+            color: #4a6fa5;
+        }
+        
+        .settings-nav a.active {
+            font-weight: 600;
+        }
+        
+        .settings-nav i {
+            width: 24px;
+            text-align: center;
+            margin-right: 0.5rem;
+        }
+        
+        .settings-content {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #4a6fa5;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f4f9;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #4a6fa5;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .profile-picture {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-picture img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            border: 3px solid #f0f4f9;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .profile-picture img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-upload {
+            background-color: #f0f4f9;
+            color: #4a6fa5;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-upload:hover {
+            background-color: #e0e9f4;
+        }
+        
+        .btn-save {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.2);
+        }
+        
+        .btn-save:hover {
+            background-color: #3a5a80;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 111, 165, 0.3);
+        }
+        
+        .notification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #4a6fa5;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ffd166;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Delay animations for form groups */
+        .form-group:nth-child(1) { animation-delay: 0.2s; }
+        .form-group:nth-child(2) { animation-delay: 0.3s; }
+        .form-group:nth-child(3) { animation-delay: 0.4s; }
+        .form-group:nth-child(4) { animation-delay: 0.5s; }
+        .form-group:nth-child(5) { animation-delay: 0.6s; }
+        
+        /* Delay animations for notification items */
+        .notification-item:nth-child(1) { animation-delay: 0.2s; }
+        .notification-item:nth-child(2) { animation-delay: 0.3s; }
+        .notification-item:nth-child(3) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Browse</a></li>
+                    <li><a href="#">My Books</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="page-title">
+            <h1>Account Settings</h1>
+            <p>Manage your account preferences</p>
+        </div>
+        
+        <div class="settings-container">
+            <div class="settings-sidebar">
+                <ul class="settings-nav">
+                    <li><a href="#profile" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#security"><i class="fas fa-lock"></i> Security</a></li>
+                    <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy</a></li>
+                    <li><a href="#payment"><i class="fas fa-credit-card"></i> Payment</a></li>
+                </ul>
+            </div>
+            
+            <div class="settings-content">
+                <section id="profile">
+                    <h2 class="section-title">Profile Information</h2>
+                    
+                    <div class="profile-picture">
+                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Profile Picture">
+                        <button class="btn-upload">Change Photo</button>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-control" value="John">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-control" value="Doe">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" value="john.doe@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" class="form-control" rows="4">Book lover and avid reader. Mostly interested in science fiction and fantasy novels.</textarea>
+                    </div>
+                    
+                    <button class="btn-save">Save Changes</button>
+                </section>
+                
+                <section id="notifications" style="display: none;">
+                    <h2 class="section-title">Notification Preferences</h2>
+                    
+                    <div class="notification-item">
+                        <div>
+                            <h4>New Messages</h4>
+                            <p>Get notified when you receive new messages</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div>
+                            <h4>Book Swap Requests</h4>
+                            <p>Get notified when someone requests your book</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div>
+                            <h4>Promotional Offers</h4>
+                            <p>Receive occasional offers and discounts</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <button class="btn-save">Save Preferences</button>
+                </section>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-goodreads-g"></i></a>
+            </div>
+            <p class="copyright">© 2023 BookSwap. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple tab switching functionality
+        document.querySelectorAll('.settings-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active tab
+                document.querySelector('.settings-nav a.active').classList.remove('active');
+                this.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('.settings-content section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show selected section
+                const target = this.getAttribute('href');
+                document.querySelector(target).style.display = 'block';
+            });
+        });
+        
+        // Form submission (would be connected to backend in real application)
+        document.querySelectorAll('.btn-save').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = 'Saving...';
+                this.disabled = true;
+                
+                // Simulate save action
+                setTimeout(() => {
+                    this.textContent = 'Saved!';
+                    setTimeout(() => {
+                        this.textContent = 'Save Changes';
+                        this.disabled = false;
+                    }, 1500);
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

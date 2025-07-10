@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - BookSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Existing meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add these new meta tags -->
+    <meta name="description" content="BookSwap: Trade textbooks with students on your campus.">
+    <meta name="keywords" content="books, textbooks, swap, trade, college">
+    <meta property="og:title" content="BookSwap">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/images/cover.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Rest of your head content (title, CSS, etc.) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ffd166;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+        
+        main {
+            padding: 3rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .legal-doc {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        .legal-doc h1 {
+            font-size: 2.5rem;
+            color: #4a6fa5;
+            margin-bottom: 0.5rem;
+            position: relative;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+        
+        .legal-doc h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #ffd166;
+            margin: 1rem 0 2rem;
+            border-radius: 2px;
+            animation: expandWidth 0.8s ease-out 0.4s both;
+        }
+        
+        .last-updated {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+        
+        .doc-content h2 {
+            color: #4a6fa5;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        
+        .doc-content p {
+            margin-bottom: 1rem;
+            animation: fadeIn 0.8s ease-out both;
+        }
+        
+        .doc-content ul {
+            margin: 1rem 0 2rem 2rem;
+            animation: fadeIn 0.8s ease-out both;
+        }
+        
+        .doc-content li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            left: -10px;
+            animation: slideInLeft 0.5s ease-out both;
+        }
+        
+        .doc-content li::before {
+            content: '•';
+            color: #ffd166;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ffd166;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes expandWidth {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 80px;
+                opacity: 1;
+            }
+        }
+        
+        /* Staggered animations for list items */
+        .doc-content li:nth-child(1) { animation-delay: 0.4s; }
+        .doc-content li:nth-child(2) { animation-delay: 0.5s; }
+        .doc-content li:nth-child(3) { animation-delay: 0.6s; }
+        .doc-content li:nth-child(4) { animation-delay: 0.7s; }
+        
+        /* Staggered animations for headings */
+        .doc-content h2:nth-of-type(1) { animation-delay: 0.5s; }
+        .doc-content h2:nth-of-type(2) { animation-delay: 0.6s; }
+        .doc-content h2:nth-of-type(3) { animation-delay: 0.7s; }
+        .doc-content h2:nth-of-type(4) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Browse</a></li>
+                    <li><a href="#">My Books</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="legal-doc">
+            <div class="container">
+                <h1>Privacy Policy</h1>
+                <p class="last-updated">Last Updated: June 15, 2023</p>
+                
+                <div class="doc-content">
+                    <h2>1. Information We Collect</h2>
+                    <p>We collect information you provide directly to us when you create an account, list or purchase books, or communicate with us. This may include:</p>
+                    <ul>
+                        <li>Personal information (name, email, phone number)</li>
+                        <li>University information (campus, student ID)</li>
+                        <li>Transaction details</li>
+                        <li>Communication records</li>
+                    </ul>
+                    
+                    <h2>2. How We Use Your Information</h2>
+                    <p>We use the information we collect to:</p>
+                    <ul>
+                        <li>Provide and improve our services</li>
+                        <li>Facilitate transactions between users</li>
+                        <li>Communicate with you about your account</li>
+                        <li>Monitor and analyze usage trends</li>
+                    </ul>
+                    
+                    <h2>3. Information Sharing</h2>
+                    <p>We may share your information in the following circumstances:</p>
+                    <ul>
+                        <li>With other users to facilitate transactions</li>
+                        <li>With service providers who assist in our operations</li>
+                        <li>When required by law or to protect rights</li>
+                    </ul>
+                    
+                    <h2>4. Data Security</h2>
+                    <p>We implement appropriate security measures to protect your information, including:</p>
+                    <ul>
+                        <li>Encryption of sensitive data</li>
+                        <li>Regular security audits</li>
+                        <li>Access controls</li>
+                    </ul>
+                    
+                    <h2>5. Your Choices</h2>
+                    <p>You can:</p>
+                    <ul>
+                        <li>Update your account information at any time</li>
+                        <li>Opt-out of marketing communications</li>
+                        <li>Request deletion of your account</li>
+                    </ul>
+                    
+                    <h2>6. Changes to This Policy</h2>
+                    <p>We may update this policy periodically. We'll notify you of significant changes through our website or email.</p>
+                    
+                    <h2>Contact Us</h2>
+                    <p>If you have any questions about this Privacy Policy, please contact us at privacy@bookswap.com.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-goodreads-g"></i></a>
+            </div>
+            <p class="copyright">© 2023 BookSwap. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

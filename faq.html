@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - BookSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4a6bff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #4a6bff;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger .line {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+        }
+
+        .faq h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .faq h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #4a6bff, #6a5acd);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .faq-item:nth-child(1) { animation-delay: 0.1s; }
+        .faq-item:nth-child(2) { animation-delay: 0.2s; }
+        .faq-item:nth-child(3) { animation-delay: 0.3s; }
+        .faq-item:nth-child(4) { animation-delay: 0.4s; }
+        .faq-item:nth-child(5) { animation-delay: 0.5s; }
+        .faq-item:nth-child(6) { animation-delay: 0.6s; }
+
+        .faq-item.active {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: rgba(74, 107, 255, 0.05);
+        }
+
+        .faq-question h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-right: 15px;
+        }
+
+        .faq-question i {
+            color: #4a6bff;
+            transition: transform 0.3s ease;
+            min-width: 20px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 20px;
+        }
+
+        .faq-answer p {
+            color: #7f8c8d;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #7f8c8d;
+        }
+
+        .faq-answer ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Contact Support */
+        .contact-support {
+            text-align: center;
+            margin-top: 50px;
+            animation: fadeIn 0.5s ease;
+            animation-delay: 0.7s;
+            animation-fill-mode: both;
+        }
+
+        .contact-support h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #4a6bff;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(74, 107, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #3a5bef;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.4);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #4a6bff;
+        }
+
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #4a6bff;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: #4a6bff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: #fff;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 30px;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .faq {
+                padding: 100px 0 40px;
+            }
+
+            .faq-question {
+                padding: 15px;
+            }
+
+            .faq-question h3 {
+                font-size: 16px;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 15px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">BookSwap</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li><a href="add-book.html">Sell</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="faq.html" class="active">FAQ</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="faq">
+            <div class="container">
+                <h1>Frequently Asked Questions</h1>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I list a book for sale?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To list a book, click on "Sell Books" in the navigation menu and fill out the book details form. You'll need to provide:</p>
+                            <ul>
+                                <li>Book title and author</li>
+                                <li>ISBN (optional but recommended)</li>
+                                <li>Condition (New, Like New, Good, Fair)</li>
+                                <li>Your asking price</li>
+                                <li>At least one clear photo of the book</li>
+                            </ul>
+                            <p>Once submitted, your book will be visible to potential buyers within minutes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How does payment work?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>BookSwap facilitates peer-to-peer transactions. When a buyer is interested in your book:</p>
+                            <ul>
+                                <li>You'll receive a notification via email or in your account</li>
+                                <li>You can arrange payment directly with the buyer</li>
+                                <li>We recommend using secure payment methods like UPI or meeting in person on campus for cash transactions</li>
+                                <li>For your safety, avoid sharing personal banking details</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What condition should my book be in to sell?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept books in various conditions, but they must be:</p>
+                            <ul>
+                                <li><strong>New:</strong> Never used, still in original packaging</li>
+                                <li><strong>Like New:</strong> Gently used, no visible wear</li>
+                                <li><strong>Good:</strong> Some wear but all pages intact</li>
+                                <li><strong>Fair:</strong> Visible wear but still usable</li>
+                            </ul>
+                            <p>Books with missing pages, excessive highlighting, or water damage cannot be listed.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I contact a seller?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To contact a seller:</p>
+                            <ul>
+                                <li>Navigate to the book you're interested in</li>
+                                <li>Click the "Contact Seller" button</li>
+                                <li>Send your message through our secure messaging system</li>
+                                <li>The seller will respond directly to your email or through our platform</li>
+                            </ul>
+                            <p>For your safety, all initial communications should stay within the BookSwap platform.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What fees does BookSwap charge?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>BookSwap is completely free to use! We don't charge any:</p>
+                            <ul>
+                                <li>Listing fees</li>
+                                <li>Commission on sales</li>
+                                <li>Membership fees</li>
+                            </ul>
+                            <p>Our mission is to help students save money on textbooks by connecting buyers and sellers directly.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I delete my account?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To delete your BookSwap account:</p>
+                            <ul>
+                                <li>Go to your Account Settings</li>
+                                <li>Scroll to the "Delete Account" section</li>
+                                <li>Follow the prompts to confirm deletion</li>
+                            </ul>
+                            <p>Note: This action is permanent and will remove all your listings and account information from our system.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-support">
+                    <h2>Still have questions?</h2>
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-headset"></i> Contact Support
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BookSwap</h3>
+                    <p>Connecting students with affordable textbooks since 2023.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="browse.html">Browse Books</a></li>
+                        <li><a href="add-book.html">Sell Books</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> support@bookswap.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 BookSwap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Add animation to elements when they come into view
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.faq-item');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.animation = 'fadeInUp 0.5s ease forwards';
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        });
+    </script>
+</body>
+</html>

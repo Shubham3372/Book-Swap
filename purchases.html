@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Purchases - BookSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Existing meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add these new meta tags -->
+    <meta name="description" content="BookSwap: Trade textbooks with students on your campus.">
+    <meta name="keywords" content="books, textbooks, swap, trade, college">
+    <meta property="og:title" content="BookSwap">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/images/cover.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Rest of your head content (title, CSS, etc.) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ffd166;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+        
+        main {
+            padding: 3rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #4a6fa5;
+            position: relative;
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #ffd166;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+        
+        .purchases-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .purchase-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .purchase-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+            transition: all 0.3s;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .purchase-item:last-child {
+            border-bottom: none;
+        }
+        
+        .purchase-item:hover {
+            background-color: #f9f9f9;
+            transform: translateX(5px);
+        }
+        
+        .book-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .book-cover {
+            width: 60px;
+            height: 80px;
+            margin-right: 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .purchase-item:hover .book-cover img {
+            transform: scale(1.05);
+        }
+        
+        .book-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .book-author {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .purchase-price, .purchase-date, .purchase-status {
+            text-align: center;
+        }
+        
+        .status-delivered {
+            color: #28a745;
+            background-color: #e3f7e8;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .status-shipping {
+            color: #ffc107;
+            background-color: #fff8e1;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .status-cancelled {
+            color: #dc3545;
+            background-color: #ffe8e8;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .empty-purchases {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .empty-purchases i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-purchases p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-browse {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-browse:hover {
+            background-color: #3a5a80;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ffd166;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Delay animations for purchase items */
+        .purchase-item:nth-child(1) { animation-delay: 0.2s; }
+        .purchase-item:nth-child(2) { animation-delay: 0.3s; }
+        .purchase-item:nth-child(3) { animation-delay: 0.4s; }
+        .purchase-item:nth-child(4) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Browse</a></li>
+                    <li><a href="#">My Books</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="page-title">
+            <h1>My Purchases</h1>
+            <p>View your purchase history</p>
+        </div>
+        
+        <div class="purchases-container">
+            <div class="purchase-header">
+                <div>Book</div>
+                <div>Price</div>
+                <div>Date</div>
+                <div>Status</div>
+            </div>
+            
+            <div class="purchase-item">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="The Great Gatsby">
+                    </div>
+                    <div>
+                        <div class="book-title">The Great Gatsby</div>
+                        <div class="book-author">F. Scott Fitzgerald</div>
+                    </div>
+                </div>
+                <div class="purchase-price">$12.99</div>
+                <div class="purchase-date">Jun 15, 2023</div>
+                <div class="purchase-status">
+                    <span class="status-delivered">Delivered</span>
+                </div>
+            </div>
+            
+            <div class="purchase-item">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="To Kill a Mockingbird">
+                    </div>
+                    <div>
+                        <div class="book-title">To Kill a Mockingbird</div>
+                        <div class="book-author">Harper Lee</div>
+                    </div>
+                </div>
+                <div class="purchase-price">$10.50</div>
+                <div class="purchase-date">Jun 10, 2023</div>
+                <div class="purchase-status">
+                    <span class="status-delivered">Delivered</span>
+                </div>
+            </div>
+            
+            <div class="purchase-item">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="1984">
+                    </div>
+                    <div>
+                        <div class="book-title">1984</div>
+                        <div class="book-author">George Orwell</div>
+                    </div>
+                </div>
+                <div class="purchase-price">$9.99</div>
+                <div class="purchase-date">Jun 5, 2023</div>
+                <div class="purchase-status">
+                    <span class="status-shipping">Shipping</span>
+                </div>
+            </div>
+            
+            <div class="purchase-item">
+                <div class="book-info">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1600189261867-30e5ffe7b8da?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pride and Prejudice">
+                    </div>
+                    <div>
+                        <div class="book-title">Pride and Prejudice</div>
+                        <div class="book-author">Jane Austen</div>
+                    </div>
+                </div>
+                <div class="purchase-price">$8.75</div>
+                <div class="purchase-date">May 28, 2023</div>
+                <div class="purchase-status">
+                    <span class="status-cancelled">Cancelled</span>
+                </div>
+            </div>
+            
+            <!-- Empty state example (hidden by default) -->
+            <!-- <div class="empty-purchases">
+                <i class="fas fa-book-open"></i>
+                <h3>No purchases yet</h3>
+                <p>You haven't purchased any books yet. Start browsing our collection!</p>
+                <button class="btn-browse">Browse Books</button>
+            </div> -->
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-goodreads-g"></i></a>
+            </div>
+            <p class="copyright">© 2023 BookSwap. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

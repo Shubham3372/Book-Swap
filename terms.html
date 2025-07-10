@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - BookSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Existing meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add these new meta tags -->
+    <meta name="description" content="BookSwap: Trade textbooks with students on your campus.">
+    <meta name="keywords" content="books, textbooks, swap, trade, college">
+    <meta property="og:title" content="BookSwap">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/images/cover.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Rest of your head content (title, CSS, etc.) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ffd166;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+        
+        main {
+            padding: 3rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .legal-doc {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        .legal-doc h1 {
+            font-size: 2.5rem;
+            color: #4a6fa5;
+            margin-bottom: 0.5rem;
+            position: relative;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+        
+        .legal-doc h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #ffd166;
+            margin: 1rem 0 2rem;
+            border-radius: 2px;
+            animation: expandWidth 0.8s ease-out 0.4s both;
+        }
+        
+        .last-updated {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+        
+        .doc-content h2 {
+            color: #4a6fa5;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        
+        .doc-content p {
+            margin-bottom: 1rem;
+            animation: fadeIn 0.8s ease-out both;
+        }
+        
+        .doc-content ul {
+            margin: 1rem 0 2rem 2rem;
+            animation: fadeIn 0.8s ease-out both;
+        }
+        
+        .doc-content li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            left: -10px;
+            animation: slideInLeft 0.5s ease-out both;
+        }
+        
+        .doc-content li::before {
+            content: '•';
+            color: #ffd166;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .doc-content .highlight {
+            background-color: #fff8e1;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ffd166;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: #4a6fa5;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #3a5a80;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes expandWidth {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 80px;
+                opacity: 1;
+            }
+        }
+        
+        /* Staggered animations for list items */
+        .doc-content li:nth-child(1) { animation-delay: 0.4s; }
+        .doc-content li:nth-child(2) { animation-delay: 0.5s; }
+        .doc-content li:nth-child(3) { animation-delay: 0.6s; }
+        .doc-content li:nth-child(4) { animation-delay: 0.7s; }
+        
+        /* Staggered animations for headings */
+        .doc-content h2:nth-of-type(1) { animation-delay: 0.5s; }
+        .doc-content h2:nth-of-type(2) { animation-delay: 0.6s; }
+        .doc-content h2:nth-of-type(3) { animation-delay: 0.7s; }
+        .doc-content h2:nth-of-type(4) { animation-delay: 0.8s; }
+        .doc-content h2:nth-of-type(5) { animation-delay: 0.9s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Browse</a></li>
+                    <li><a href="#">My Books</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="legal-doc">
+            <div class="container">
+                <h1>Terms of Service</h1>
+                <p class="last-updated">Last Updated: June 15, 2023</p>
+                
+                <div class="doc-content">
+                    <h2>1. Acceptance of Terms</h2>
+                    <p>By accessing or using the BookSwap platform, you agree to be bound by these Terms of Service and our <span class="highlight">Privacy Policy</span>. If you do not agree to these terms, please do not use our services.</p>
+                    
+                    <h2>2. User Responsibilities</h2>
+                    <p>As a user of BookSwap, you agree to:</p>
+                    <ul>
+                        <li>Provide accurate and complete information about books you list for sale or swap</li>
+                        <li>Honor all transactions you agree to with other users</li>
+                        <li>Communicate respectfully and professionally with other users</li>
+                        <li>Comply with all applicable laws and regulations</li>
+                        <li>Not engage in fraudulent, deceptive, or illegal activities</li>
+                    </ul>
+                    
+                    <h2>3. Transactions</h2>
+                    <p>BookSwap serves as a platform that connects buyers and sellers but is not a party to any transactions between users. All transactions are agreements between users directly. We are not responsible for:</p>
+                    <ul>
+                        <li>The quality, safety, or legality of items advertised</li>
+                        <li>The truth or accuracy of users' content</li>
+                        <li>The ability of sellers to sell items or buyers to pay for them</li>
+                    </ul>
+                    
+                    <h2>4. Content</h2>
+                    <p>You retain all rights to any content you submit, post, or display on BookSwap. By submitting content, you grant us a worldwide, non-exclusive license to use, reproduce, and display such content in connection with our services.</p>
+                    
+                    <h2>5. Prohibited Conduct</h2>
+                    <p>You agree not to:</p>
+                    <ul>
+                        <li>Use BookSwap for any unlawful purpose</li>
+                        <li>Post false, inaccurate, or misleading content</li>
+                        <li>Infringe on any intellectual property rights</li>
+                        <li>Harass, abuse, or harm other users</li>
+                        <li>Distribute viruses or malicious code</li>
+                    </ul>
+                    
+                    <h2>6. Account Termination</h2>
+                    <p>We may suspend or terminate your account at any time for any reason, including if we believe you have violated these Terms. You may terminate your account at any time by contacting us.</p>
+                    
+                    <h2>7. Disclaimers</h2>
+                    <p>BookSwap is provided "as is" without warranties of any kind. We do not guarantee that:</p>
+                    <ul>
+                        <li>The service will be uninterrupted or error-free</li>
+                        <li>Defects will be corrected</li>
+                        <li>The service will meet your requirements</li>
+                    </ul>
+                    
+                    <h2>8. Limitation of Liability</h2>
+                    <p>To the maximum extent permitted by law, BookSwap shall not be liable for any indirect, incidental, special, or consequential damages resulting from your use of the service.</p>
+                    
+                    <h2>9. Changes to Terms</h2>
+                    <p>We may modify these Terms at any time. We will notify you of significant changes through our website or email. Your continued use of BookSwap constitutes acceptance of the modified Terms.</p>
+                    
+                    <h2>10. Governing Law</h2>
+                    <p>These Terms shall be governed by the laws of the State of California without regard to its conflict of law provisions.</p>
+                    
+                    <h2>Contact Us</h2>
+                    <p>If you have any questions about these Terms of Service, please contact us at <span class="highlight">legal@bookswap.com</span>.</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="back-to-top" id="backToTop">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-goodreads-g"></i></a>
+            </div>
+            <p class="copyright">© 2023 BookSwap. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Highlight current year in copyright
+        document.querySelector('.copyright').innerHTML = `© ${new Date().getFullYear()} BookSwap. All rights reserved.`;
+    </script>
+</body>
+</html>

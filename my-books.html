@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Books - BookSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Existing meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add these new meta tags -->
+    <meta name="description" content="BookSwap: Trade textbooks with students on your campus.">
+    <meta name="keywords" content="books, textbooks, swap, trade, college">
+    <meta property="og:title" content="BookSwap">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://yourdomain.com/images/cover.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Rest of your head content (title, CSS, etc.) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ffd166;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd166;
+        }
+        
+        main {
+            padding: 3rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #4a6fa5;
+            position: relative;
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #ffd166;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+        
+        .books-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .book-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .book-cover {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .book-card:hover .book-cover img {
+            transform: scale(1.05);
+        }
+        
+        .book-info {
+            padding: 1.5rem;
+        }
+        
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .book-author {
+            color: #666;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+        
+        .book-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .status-available {
+            background-color: #e3f7e8;
+            color: #28a745;
+        }
+        
+        .status-swapped {
+            background-color: #ffe8e8;
+            color: #dc3545;
+        }
+        
+        .book-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-edit {
+            background-color: #4a6fa5;
+            color: white;
+        }
+        
+        .btn-edit:hover {
+            background-color: #3a5a80;
+        }
+        
+        .btn-delete {
+            background-color: #f8f9fa;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+        
+        .btn-delete:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .add-book {
+            text-align: center;
+            margin-top: 3rem;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .btn-add {
+            background-color: #ffd166;
+            color: #333;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255, 209, 102, 0.3);
+        }
+        
+        .btn-add:hover {
+            background-color: #ffc233;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 209, 102, 0.4);
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ffd166;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            animation: slideInUp 0.3s ease-out forwards;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: #4a6fa5;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #4a6fa5;
+            outline: none;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        
+        .btn-cancel {
+            background-color: #f8f9fa;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #e9ecef;
+        }
+        
+        .btn-submit {
+            background-color: #4a6fa5;
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            background-color: #3a5a80;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Delay animations for book cards */
+        .book-card:nth-child(1) { animation-delay: 0.1s; }
+        .book-card:nth-child(2) { animation-delay: 0.2s; }
+        .book-card:nth-child(3) { animation-delay: 0.3s; }
+        .book-card:nth-child(4) { animation-delay: 0.4s; }
+        .book-card:nth-child(5) { animation-delay: 0.5s; }
+        .book-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Browse</a></li>
+                    <li><a href="#">My Books</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="page-title">
+            <h1>My Books</h1>
+            <p>Manage your book collection</p>
+        </div>
+        
+        <div class="books-container" id="booksContainer">
+            <!-- Book cards will be added here dynamically -->
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Book Cover">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">The Great Gatsby</h3>
+                    <p class="book-author">F. Scott Fitzgerald</p>
+                    <span class="book-status status-available">Available</span>
+                    <div class="book-actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Book Cover">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">To Kill a Mockingbird</h3>
+                    <p class="book-author">Harper Lee</p>
+                    <span class="book-status status-swapped">Swapped</span>
+                    <div class="book-actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Book Cover">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">1984</h3>
+                    <p class="book-author">George Orwell</p>
+                    <span class="book-status status-available">Available</span>
+                    <div class="book-actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="add-book">
+            <button class="btn btn-add" id="addBookBtn">
+                <i class="fas fa-plus"></i> Add New Book
+            </button>
+        </div>
+    </main>
+    
+    <!-- Add Book Modal -->
+    <div class="modal" id="addBookModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Book</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="bookForm">
+                <div class="form-group">
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" id="bookTitle" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookAuthor">Author</label>
+                    <input type="text" id="bookAuthor" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookCover">Cover Image URL</label>
+                    <input type="url" id="bookCover" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookStatus">Status</label>
+                    <select id="bookStatus" class="form-control" required>
+                        <option value="available">Available</option>
+                        <option value="swapped">Swapped</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-submit">Add Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Book<span>Swap</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-goodreads-g"></i></a>
+            </div>
+            <p class="copyright">© 2023 BookSwap. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const addBookBtn = document.getElementById('addBookBtn');
+        const addBookModal = document.getElementById('addBookModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const bookForm = document.getElementById('bookForm');
+        const booksContainer = document.getElementById('booksContainer');
+        
+        // Open modal when Add Book button is clicked
+        addBookBtn.addEventListener('click', () => {
+            addBookModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        });
+        
+        // Close modal when X button is clicked
+        closeModalBtn.addEventListener('click', () => {
+            addBookModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when Cancel button is clicked
+        cancelBtn.addEventListener('click', () => {
+            addBookModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside the modal content
+        addBookModal.addEventListener('click', (e) => {
+            if (e.target === addBookModal) {
+                addBookModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Handle form submission
+        bookForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const title = document.getElementById('bookTitle').value;
+            const author = document.getElementById('bookAuthor').value;
+            const coverUrl = document.getElementById('bookCover').value;
+            const status = document.getElementById('bookStatus').value;
+            
+            // Create new book card
+            const newBookCard = document.createElement('div');
+            newBookCard.className = 'book-card';
+            newBookCard.style.animation = 'fadeInUp 0.6s ease-out';
+            newBookCard.innerHTML = `
+                <div class="book-cover">
+                    <img src="${coverUrl || 'https://via.placeholder.com/300x200?text=No+Cover'}" alt="Book Cover">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">${title}</h3>
+                    <p class="book-author">${author}</p>
+                    <span class="book-status ${status === 'available' ? 'status-available' : 'status-swapped'}">${
+                        status === 'available' ? 'Available' : 'Swapped'
+                    }</span>
+                    <div class="book-actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Delete</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add delete functionality to the new card
+            const deleteBtn = newBookCard.querySelector('.btn-delete');
+            deleteBtn.addEventListener('click', () => {
+                newBookCard.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    newBookCard.remove();
+                }, 300);
+            });
+            
+            // Add the new card to the container
+            booksContainer.prepend(newBookCard);
+            
+            // Reset and close the form
+            bookForm.reset();
+            addBookModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Add delete functionality to existing cards
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.book-card');
+                card.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    card.remove();
+                }, 300);
+            });
+        });
+        
+        // Add fadeOut animation to CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(20px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

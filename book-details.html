@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - BookSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4a6bff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #4a6bff;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger .line {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Book Details Section */
+        .book-details-section {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+        }
+
+        .book-details-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        .book-images {
+            position: sticky;
+            top: 120px;
+            animation: slideInLeft 0.5s ease;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 70px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            background-color: #fff;
+            padding: 5px;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            border-color: #4a6bff;
+            transform: translateY(-5px);
+        }
+
+        .book-info {
+            animation: slideInRight 0.5s ease;
+        }
+
+        .book-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .book-author {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .book-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .meta-item i {
+            color: #4a6bff;
+        }
+
+        .book-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4a6bff;
+            margin: 20px 0;
+        }
+
+        .book-condition {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .condition-new {
+            background-color: #e3f7e8;
+            color: #27ae60;
+        }
+
+        .condition-like-new {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .condition-good {
+            background-color: #fff8e1;
+            color: #f39c12;
+        }
+
+        .condition-fair {
+            background-color: #fde0e0;
+            color: #e74c3c;
+        }
+
+        .book-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .seller-info {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .seller-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .seller-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #4a6bff;
+        }
+
+        .seller-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .seller-rating {
+            color: #f39c12;
+            font-size: 14px;
+        }
+
+        .seller-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #4a6bff;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(74, 107, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #3a5bef;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 107, 255, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #4a6bff;
+            border: 1px solid #4a6bff;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(74, 107, 255, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: #2ecc71;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Related Books */
+        .related-books {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, #4a6bff, #6a5acd);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .book-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .book-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .book-card:hover .book-card-image img {
+            transform: scale(1.05);
+        }
+
+        .book-card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4a6bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .book-card-details {
+            padding: 20px;
+        }
+
+        .book-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .book-card-author {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .book-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .book-card-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4a6bff;
+        }
+
+        .book-card-condition {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .condition-new {
+            background-color: #e3f7e8;
+            color: #27ae60;
+        }
+
+        .condition-like-new {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .condition-good {
+            background-color: #fff8e1;
+            color: #f39c12;
+        }
+
+        .condition-fair {
+            background-color: #fde0e0;
+            color: #e74c3c;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #4a6bff;
+        }
+
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #4a6bff;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: #4a6bff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .book-details-container {
+                grid-template-columns: 1fr;
+            }
+
+            .book-images {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: #fff;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 30px;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .book-details-section {
+                padding: 100px 0 40px;
+            }
+
+            .book-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">BookSwap</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="browse.html">Browse</a></li>
+                    <li><a href="add-book.html">Sell</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="book-details-section">
+            <div class="container">
+                <div class="book-details-container">
+                    <!-- Book Images -->
+                    <div class="book-images">
+                        <img src="https://m.media-amazon.com/images/I/41vLer1KbmL._SY425_.jpg" alt="Introduction to Algorithms" class="main-image" id="mainImage">
+                        <div class="thumbnail-container">
+                            <img src="https://m.media-amazon.com/images/I/41vLer1KbmL._SY425_.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="changeImage(this)">
+                            <img src="https://m.media-amazon.com/images/I/51fgqXcNq3L._SY425_.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
+                            <img src="https://m.media-amazon.com/images/I/51iVqTfN4ZL._SY425_.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                            <img src="https://m.media-amazon.com/images/I/51SnPk6+C+L._SY425_.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage(this)">
+                        </div>
+                    </div>
+
+                    <!-- Book Info -->
+                    <div class="book-info">
+                        <h1 class="book-title">Introduction to Algorithms</h1>
+                        <p class="book-author">by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein</p>
+                        
+                        <div class="book-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-book"></i>
+                                <span>Computer Science</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-barcode"></i>
+                                <span>ISBN: 9780262033848</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Published: 2009</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Pages: 1312</span>
+                            </div>
+                        </div>
+
+                        <div class="book-price">₹899</div>
+                        <span class="book-condition condition-new">New</span>
+
+                        <div class="book-description">
+                            <p>The latest edition of the essential text and professional reference, with substantial new material on such topics as vEB trees, multithreaded algorithms, dynamic programming, and edge-based flow.</p>
+                            <p>Some books on algorithms are rigorous but incomplete; others cover masses of material but lack rigor. Introduction to Algorithms uniquely combines rigor and comprehensiveness. The book covers a broad range of algorithms in depth, yet makes their design and analysis accessible to all levels of readers.</p>
+                        </div>
+
+                        <!-- Seller Info -->
+                        <div class="seller-info">
+                            <div class="seller-header">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Seller" class="seller-avatar">
+                                <div>
+                                    <h4 class="seller-name">Rajesh Kumar</h4>
+                                    <div class="seller-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>(24 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Computer Science graduate with 5 years of teaching experience. All my books are well-maintained and kept in perfect condition.</p>
+                            <div class="seller-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Delhi, India</span>
+                                <span><i class="fas fa-book"></i> 12 books listed</span>
+                                <span><i class="fas fa-user-check"></i> Verified seller</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <button class="btn btn-secondary"><i class="fas fa-bolt"></i> Buy Now</button>
+                            <button class="btn btn-outline"><i class="far fa-heart"></i> Add to Wishlist</button>
+                            <button class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Seller</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Books -->
+                <div class="related-books">
+                    <h2 class="section-title">Related Books</h2>
+                    <div class="books-grid">
+                        <div class="book-card" style="animation-delay: 0.1s;">
+                            <div class="book-card-image">
+                                <img src="https://m.media-amazon.com/images/I/41xShlnTZTL._SY425_.jpg" alt="Clean Code">
+                                <span class="book-card-badge">Computer Science</span>
+                            </div>
+                            <div class="book-card-details">
+                                <h3 class="book-card-title">Clean Code</h3>
+                                <p class="book-card-author">Robert C. Martin</p>
+                                <div class="book-card-meta">
+                                    <div class="book-card-price">₹650</div>
+                                    <div class="book-card-condition condition-like-new">Like New</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="book-card" style="animation-delay: 0.2s;">
+                            <div class="book-card-image">
+                                <img src="https://m.media-amazon.com/images/I/51A8l+FxFNL._SY425_.jpg" alt="The Pragmatic Programmer">
+                                <span class="book-card-badge">Computer Science</span>
+                            </div>
+                            <div class="book-card-details">
+                                <h3 class="book-card-title">The Pragmatic Programmer</h3>
+                                <p class="book-card-author">Andrew Hunt, David Thomas</p>
+                                <div class="book-card-meta">
+                                    <div class="book-card-price">₹550</div>
+                                    <div class="book-card-condition condition-good">Good</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="book-card" style="animation-delay: 0.3s;">
+                            <div class="book-card-image">
+                                <img src="https://m.media-amazon.com/images/I/51szD9HC9pL._SY425_.jpg" alt="Design Patterns">
+                                <span class="book-card-badge">Computer Science</span>
+                            </div>
+                            <div class="book-card-details">
+                                <h3 class="book-card-title">Design Patterns</h3>
+                                <p class="book-card-author">Erich Gamma, Richard Helm</p>
+                                <div class="book-card-meta">
+                                    <div class="book-card-price">₹750</div>
+                                    <div class="book-card-condition condition-fair">Fair</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="book-card" style="animation-delay: 0.4s;">
+                            <div class="book-card-image">
+                                <img src="https://m.media-amazon.com/images/I/51Q5O1W+7BL._SY425_.jpg" alt="Engineering Mathematics">
+                                <span class="book-card-badge">Engineering</span>
+                            </div>
+                            <div class="book-card-details">
+                                <h3 class="book-card-title">Engineering Mathematics</h3>
+                                <p class="book-card-author">K.A. Stroud</p>
+                                <div class="book-card-meta">
+                                    <div class="book-card-price">₹499</div>
+                                    <div class="book-card-condition condition-good">Good</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BookSwap</h3>
+                    <p>Connecting students with affordable textbooks since 2023.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="browse.html">Browse Books</a></li>
+                        <li><a href="add-book.html">Sell Books</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@bookswap.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 BookSwap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // Change main image when thumbnail is clicked
+            window.changeImage = function(element) {
+                const mainImage = document.getElementById('mainImage');
+                mainImage.src = element.src;
+                
+                // Update active thumbnail
+                document.querySelectorAll('.thumbnail').forEach(thumb => {
+                    thumb.classList.remove('active');
+                });
+                element.classList.add('active');
+            };
+
+            // Add animation to elements when they come into view
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.book-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.animation = 'fadeInUp 0.5s ease forwards';
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+
+            // Simulate adding to cart
+            const addToCartBtn = document.querySelector('.btn-primary');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-check"></i> Added to Cart';
+                    this.style.backgroundColor = '#2ecc71';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+                        this.style.backgroundColor = '#4a6bff';
+                    }, 2000);
+                });
+            }
+
+            // Simulate adding to wishlist
+            const wishlistBtn = document.querySelector('.btn-outline:nth-of-type(1)');
+            if (wishlistBtn) {
+                wishlistBtn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.style.color = '#e74c3c';
+                        this.style.borderColor = '#e74c3c';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.style.color = '#4a6bff';
+                        this.style.borderColor = '#4a6bff';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
